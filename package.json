@@ -8,5 +8,8 @@
   },
   "scripts": {
     "test": "mocha --compilers js:babel-core/register --recursive"
+  },
+  "babel": {
+    "presets": ["es2015"]
   }
 }
