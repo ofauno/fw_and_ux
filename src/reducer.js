@@ -11,7 +11,7 @@ export function reducer(state = app_initial_state, action) {
             return app_next_pair(state);
         case 'APP_VOTE':
             return state.update('vote',
-                                vote_state => app_vote(vote_state, action.entry))
+                vote_state => app_vote(vote_state, action.entry))
     }
 
     alert('action not found!');

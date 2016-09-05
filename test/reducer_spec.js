@@ -2,11 +2,29 @@ import {Map, fromJS} from 'immutable'
 import {expect} from 'chai'
 import {reducer} from '../src/reducer'
 
-describe('reducer', () =>{
-    it('initial state', () => {
-        const action = {type: 'APP_SET_ENTRIES', entries: ['d2']}
+describe('reducer', () => {
+    it('working', () => {
+        const actions = [
+            { type: 'APP_SET_ENTRIES', entries: ['jamonazo', 'lolololol'] },
+            { type: 'APP_NEXT_PAIR' },
+            { type: 'APP_VOTE', entry: 'jamonazo' },
+            { type: 'APP_VOTE', entry: 'lolololol' },
+            { type: 'APP_VOTE', entry: 'jamonazo' },
+            { type: 'APP_NEXT_PAIR' }
+        ];
 
-        const empty_states  = [undefined, null, void 0]
+        const state = actions.reduce(reducer, Map())
+
+        expect(state).to.equal(fromJS({
+            winner: 'jamonazo'
+        }))
+
+    })
+
+    it('initial state', () => {
+        const action = { type: 'APP_SET_ENTRIES', entries: ['d2'] }
+
+        const empty_states = [undefined, null, void 0]
 
         empty_states.forEach(state => {
             const next_state = reducer(state, action)
@@ -18,33 +36,33 @@ describe('reducer', () =>{
 
     it('set entries', () => {
         const state = Map()
-        const action = { type: 'APP_SET_ENTRIES', entries: ['z1']}
+        const action = { type: 'APP_SET_ENTRIES', entries: ['z1'] }
         const next_state = reducer(state, action)
 
-        expect(next_state).to.equal(fromJS({ entries: ['z1']}))
+        expect(next_state).to.equal(fromJS({ entries: ['z1'] }))
     })
-    
+
     it('next pair', () => {
-        const state = fromJS({ entries: ['x1', 'x2']})
+        const state = fromJS({ entries: ['x1', 'x2'] })
         const action = { type: 'APP_NEXT_PAIR' }
         const next_state = reducer(state, action)
 
-        expect(next_state).to.equal(fromJS({ 
-            vote: {pair: ['x1', 'x2']}
+        expect(next_state).to.equal(fromJS({
+            vote: { pair: ['x1', 'x2'] }
             , entries: []
         }))
     })
 
     it('voting', () => {
         const state = fromJS({
-            vote: {pair:['c1', 'c3']}
+            vote: { pair: ['c1', 'c3'] }
             , entries: []
         })
         const action = { type: 'APP_VOTE', entry: 'c1' }
         const next_state = reducer(state, action)
 
-        expect(next_state).to.equal(fromJS({ 
-            vote: {pair: ['c1', 'c3'], tally: {c1: 1}}
+        expect(next_state).to.equal(fromJS({
+            vote: { pair: ['c1', 'c3'], tally: { c1: 1 } }
             , entries: []
         }))
     })

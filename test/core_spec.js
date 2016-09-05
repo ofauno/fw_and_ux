@@ -18,7 +18,7 @@ describe('app', () => {
 })
 
 function test_next_pair() {
-    it('set winner when just one entry left', () => { 
+    it('set winner when just one entry left', () => {
         const state = Map({
             vote: Map({ pair: List.of('w1', 'w2'), tally: Map({ 'w1': 123, 'w2': 13 }) })
             , entries: List()
@@ -63,7 +63,7 @@ function test_next_pair() {
 function test_voting() {
     it('creates a tally for the entry if it does not exist', () => {
         const state = Map({
-           pair: List.of('m1', 'm2')
+            pair: List.of('m1', 'm2')
         })
         const next_state = app_vote(state, 'm1')
         const new_state = Map({
@@ -75,7 +75,7 @@ function test_voting() {
 
     it('adds to the current tally', () => {
         const state = Map({
-            pair: List.of('m1', 'm2'), tally: Map({ 'm1': 1, 'm2': 2 }) 
+            pair: List.of('m1', 'm2'), tally: Map({ 'm1': 1, 'm2': 2 })
         })
         const next_state = app_vote(state, 'm2')
         const new_state = Map({
