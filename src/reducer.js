@@ -1,7 +1,6 @@
 import {app_set_entries, app_next_pair, app_vote, app_initial_state} from './core'
 
 export function reducer(state = app_initial_state, action) {
-
     if (state === null) { state = app_initial_state }
 
     switch (action.type) {
@@ -13,7 +12,7 @@ export function reducer(state = app_initial_state, action) {
             return state.update('vote',
                 vote_state => app_vote(vote_state, action.entry))
     }
-
-    alert('action not found!');
+    console.log('reducer: default: alert!')
+    // alert('action not found!');
     return state;
 }
