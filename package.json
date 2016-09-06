@@ -8,6 +8,7 @@
     "mocha": "^3.0.2"
   },
   "scripts": {
+    "dev:start": "babel-node index.js",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js  --recursive",
     "test:watch": "npm run test -- --watch"
   },
